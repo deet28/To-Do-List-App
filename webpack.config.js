@@ -3,6 +3,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 
 module.exports = {
+  watch: true,
   mode: 'development',
   entry: './src/index.js',
   output: {
@@ -26,5 +27,13 @@ module.exports = {
         },
       ]
     })
-  ]
+  ],
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
+    host: '127.0.0.1',
+    compress: true,
+    port: 9000,
+  },
 }

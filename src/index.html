@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-  <title>todolist</title>
+  <title>todolist: happydd</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src = "main.js"defer></script>
   <script src="https://use.fontawesome.com/0a3119697c.js"></script>
@@ -29,9 +29,25 @@
           <i class="fa fa-plus" aria-hidden="true"></i>
           Add New
         </button>
+        <div class = "input-box">
+            <input class = "input-value">
+            <div class = "input-buttons">
+              <button class = "proj-button new-project"> 
+                <i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
+              </button>
+              <button class = "proj-button close-project">
+                <i class="fa fa-times-circle fa-2x" aria-hidden="true"></i>
+              </button>
+            </div>
+        </div>
       </div>
     </nav>
-    <div class = "right-div" id = "view-section"></div>
+    
+    
+    <div class = "right-div" id = "view-section">
+      <h2 id = "to-do-head"></h2>
+        <ul class = "to-do-list" id = "todos"></ul>
+    </div>
   </div>
 </body>
 

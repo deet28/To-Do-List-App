@@ -5,7 +5,7 @@ body {
   min-height:2em;
   width: 100%;
   top:0;
-  left:1rem;
+  left:0.5rem;
   position: absolute;
   background-color:white;
   font-size: 3rem;
@@ -15,40 +15,35 @@ body {
 }
 
 .main-body{
-  border: 1px solid black;
   display:grid;
-  grid-template-columns: 1fr 2.2fr;
+  grid-template-columns: auto 2.2fr;
   background-color: rgb(252, 253, 252);
-  margin-left: -0%;
   margin-top:135px;
-  min-width:100%;
+  max-width:100%;
   min-height:100vh;
 
 }
-
 .left-div{
-  left:0;
   min-height:100vh; 
   background-color: lightgrey;
   border: 1px solid gray;
-  display: flex;
-  flex-direction:column;
-  align-items: center;
-  
+  display:flex;
+  flex-direction: column;
+  margin:0;
+  padding:0
 }
 
-.right-div{
-  background-color: rgb(194, 255, 182);
+h2{
+  text-align: center;
 }
 
 .button-elem{
   height:2.5rem;
   width:10rem;
   font-size:1.4rem;
-
   background-color: transparent;
   border:transparent;
-  margin-bottom: 1.8rem;
+  margin-bottom: 1.5rem;
   text-align: left;
 }
 
@@ -60,4 +55,52 @@ body {
 
 #all-button{
   margin-top:3.5rem;
+}
+
+.add-after{
+  display:none;
+}
+
+.proj-button{
+  height:3rem;
+  width:5rem;
+  padding:8px;
+  font-size: 1rem;
+  margin-top: 0.8rem;
+}
+.proj-button:hover{
+  cursor:pointer;
+}
+
+.new-project{
+  background-color: rgb(105, 231, 105);
+  color: white;
+}
+.close-project{
+  background-color: rgb(255, 74, 74);
+  color: black;
+}
+
+.input-box{
+  visibility:hidden;
+}
+
+.input-after{
+  visibility: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.input-value{
+  height:1.5rem;
+  width:90%;
+  font-size: 1rem;
+  text-align: left;
+  font-style: inherit;
+}
+
+.input-buttons{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap:10px;
 }
