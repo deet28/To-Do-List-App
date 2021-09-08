@@ -1,4 +1,6 @@
 import './style.css';
-import test from'./dom.js';
-
+import {test} from'./dom.js';
 test();
+
+
+

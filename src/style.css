@@ -1,3 +1,4 @@
+/* Main Header and Body (All)*/
 body {
   font-family:'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
 }
@@ -13,7 +14,6 @@ body {
   line-height: 2em;
   margin-bottom: 5rem;
 }
-
 .main-body{
   display:grid;
   grid-template-columns: auto 2.2fr;
@@ -23,6 +23,10 @@ body {
   min-height:100vh;
 
 }
+/* Main Header and Body */
+
+/* Left Div */ 
+/* General Structure and 'New Project' header*/
 .left-div{
   min-height:100vh; 
   background-color: lightgrey;
@@ -32,11 +36,12 @@ body {
   margin:0;
   padding:0
 }
-
 h2{
   text-align: center;
 }
+/* General Structure and 'New Project' header*/
 
+/* Left Div General Button Styling */
 .button-elem{
   height:2.5rem;
   width:10rem;
@@ -52,15 +57,13 @@ h2{
   border:1px solid darkgray;
   background-color: darkgray;
 }
-
 #all-button{
-  margin-top:3.5rem;
+  margin-top:2.5rem;
 }
+/* Left Div General Button Styling */
 
-.add-after{
-  display:none;
-}
-
+/* Section for the form - buttons and inputs that create New Project Folders (Left-Div)*/
+/* Project Folder Creation Buttons */ 
 .proj-button{
   height:3rem;
   width:5rem;
@@ -71,7 +74,11 @@ h2{
 .proj-button:hover{
   cursor:pointer;
 }
-
+.input-buttons{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap:10px;
+}
 .new-project{
   background-color: rgb(105, 231, 105);
   color: white;
@@ -81,6 +88,7 @@ h2{
   color: black;
 }
 
+/* Project Folder Creation Inputs an Input Form Dynamics */ 
 .input-box{
   visibility:hidden;
 }
@@ -98,9 +106,125 @@ h2{
   text-align: left;
   font-style: inherit;
 }
-
-.input-buttons{
-  display:grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap:10px;
+.add-after{
+  display:none;
 }
+/* Section for the form - buttons and inputs that create New Project Folders (Left-Div)*/
+
+/*Project Buttons themselves and their Corresponding Delete Buttons (Left-Div)*/
+/* Project Buttons */
+.project-list{
+  font-size:1.5rem;
+  font-style: inherit;
+  list-style-type: none;
+  text-align: start;
+  display:flex;
+  flex-direction: column;
+  flex-wrap:nowrap;
+  margin:0;
+  padding:0;
+
+}
+.proj-elem{
+  min-height:2.0rem;
+  width:10rem;
+  font-size:1.2rem;
+  word-wrap:normal;
+  background-color: transparent;
+  border:transparent;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.proj-elem:hover{
+  cursor:pointer;
+  background-color: darkgray;
+}
+
+.proj-elem > .delete-proj{
+  display:inline-flex;
+  align-self: flex-end;
+  margin-left:3em;
+}
+
+/* Project Delete Buttons */
+.delete-proj{
+  height:2.5rem;
+  line-height: 1.25rem;
+  background-color: transparent;
+  border: transparent;
+  color:black;
+  border-radius: 5px;
+  font-size: 2.5rem;
+}
+.delete-proj:hover{
+  cursor:pointer;
+  color:white;
+}
+/*Project Buttons themselves and their Corresponding Delete Buttons (Left-Div)*/
+
+/* LeftDiv */
+
+/*************************************************************************************/
+/*************************************************************************************/
+/*************************************************************************************/
+
+/* RightDiv */
+
+.right-div{
+  display:flex;
+  align-items: center;
+  flex-direction: column;
+}
+.to-do-head{
+  text-align: center;
+  top: 0;
+}
+
+/*Section for the form - buttons and inputs that create new list items (Right-Div)*/
+/* Add Button (Right Div) */
+.button-add-item{
+  height:2.5rem;
+  width:50%;
+  font-size:1.4rem;
+  background-color: transparent;
+  border:transparent;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.button-add-item:hover{
+  cursor:pointer;
+  border:1px solid darkgray;
+  background-color: darkgray;
+}
+
+/* List Item Creation Inputs and Input Form Dynamics */ 
+.new-item{
+  background-color: rgb(105, 231, 105);
+  color: white;
+}
+.close-item{
+  background-color: rgb(255, 74, 74);
+  color: black;
+}
+
+.list-input-box{
+  display:none;
+}
+
+.list-input-after{
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.list-input-value{
+  height:2rem;
+  width:80%;
+  font-size: 1rem;
+  text-align: center;
+  font-size: 1.4rem;
+  font-style: inherit;
+}
+/*Section for the form - buttons and inputs that create new list items (Right-Div)*/

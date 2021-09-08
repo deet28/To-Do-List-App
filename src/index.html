@@ -24,13 +24,14 @@
           <i class="fa fa-calendar" aria-hidden="true"></i>
           This Week
           </button>
-        <h2>New Projects</h2>
+        <h2>Project Folders</h2>
+        <ul class = "project-list"></ul>
         <button class = "button-elem" id = "add-button">
           <i class="fa fa-plus" aria-hidden="true"></i>
           Add New
         </button>
         <div class = "input-box">
-            <input class = "input-value">
+            <input type = "text" class = "input-value" placeholder = "New project" required>
             <div class = "input-buttons">
               <button class = "proj-button new-project"> 
                 <i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
@@ -43,12 +44,26 @@
       </div>
     </nav>
     
-    
     <div class = "right-div" id = "view-section">
-      <h2 id = "to-do-head"></h2>
-        <ul class = "to-do-list" id = "todos"></ul>
+      <div class = "to-do-head"></div>
+      <ul class = "to-do-list" id = "todos"></ul>
+      <button class ="button-add-item" id = "list-button">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        Add New
+      </button>
+      <div class = "list-input-box">
+            <input type = "text" class = "list-input-value"required>
+            <div class = "input-buttons">
+              <button class = "proj-button new-item"> 
+                <i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
+              </button>
+              <button class = "proj-button close-item">
+                <i class="fa fa-times-circle fa-2x" aria-hidden="true"></i>
+              </button>
+            </div>
+        </div>
     </div>
-  </div>
+  </main>
 </body>
 
 </html>
