@@ -228,3 +228,15 @@ h2{
   font-style: inherit;
 }
 /*Section for the form - buttons and inputs that create new list items (Right-Div)*/
+
+.todo-list{
+  list-style-type: none;
+  text-align: left;
+}
+
+.active{
+  background-color: darkgray;
+}
+.inactive{
+  background-color: transparent;
+}

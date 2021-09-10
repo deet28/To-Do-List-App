@@ -1,9 +1,9 @@
 import {
-  buttonListeners
+  buttonListeners,
 } from './button.js'
 
 import {
-  inputListeners
+  inputListeners,
 } from './inputs.js'
 
 
