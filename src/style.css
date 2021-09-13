@@ -229,9 +229,17 @@ h2{
 }
 /*Section for the form - buttons and inputs that create new list items (Right-Div)*/
 
-.todo-list{
-  list-style-type: none;
+.list-div{
+  width:100%;
+  font-size: 1.2rem;
+}
+
+.to-do-list{
   text-align: left;
+  width:100%;
+  display:flex;
+  flex-direction: column;
+  background-color: white;
 }
 
 .active{
@@ -239,4 +247,15 @@ h2{
 }
 .inactive{
   background-color: transparent;
+}
+
+.list-item-button{
+  background-color: lightgray;
+  font-size: 20px;
+  max-width:60%;
+  min-height:2rem;
+  margin-bottom:5px;
+}
+.list-item-button:hover{
+  cursor:pointer;
 }
