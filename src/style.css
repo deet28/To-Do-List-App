@@ -172,12 +172,17 @@ h2{
 /* RightDiv */
 
 .right-div{
+  max-width: 100%;
   display:flex;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
+  word-break:break-word;
+  
 }
 .to-do-head{
-  text-align: center;
+  text-align: left;
+  max-width: 20rem;
   top: 0;
 }
 
@@ -190,6 +195,7 @@ h2{
   background-color: transparent;
   border:transparent;
   margin-bottom: 1.5rem;
+  margin-top: 1rem;
   text-align: center;
 }
 
@@ -214,10 +220,10 @@ h2{
 }
 
 .list-input-after{
-  
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 2rem;
 }
 .list-input-value{
   height:2rem;
@@ -230,32 +236,58 @@ h2{
 /*Section for the form - buttons and inputs that create new list items (Right-Div)*/
 
 .list-div{
-  width:100%;
+  max-width:60%;
+  min-width: 60%;
   font-size: 1.2rem;
+  margin-left:0;
+
 }
 
 .to-do-list{
-  text-align: left;
-  width:100%;
+  text-align: center;
+  min-width:100%;
+  border:1px solid black;
   display:flex;
   flex-direction: column;
+  justify-content: left;
+  margin:0;
+  padding:0;
+}
+
+.list-item-div{
+  display:inline-flex;
+  background-color: white;
+  font-size: 20px;
+  min-height:2rem;
+  margin-bottom:5px;
+  margin:0;
+  padding:0;
+}
+
+.remove-item{
+  background-color: lightgray;
+  border: transparent;
+  font-size: 1.5rem;
+  line-height: 1rem;
+  margin-left:0;
+  max-height: 1.8rem;
+}
+
+.list-item-div:hover{
+  cursor:pointer;
+}
+
+.list-button{
+  margin-left:1rem;
+  margin-right:2rem;
   background-color: white;
 }
 
+
+/* Toggle Active and Inactive buttons */ 
 .active{
   background-color: darkgray;
 }
 .inactive{
   background-color: transparent;
-}
-
-.list-item-button{
-  background-color: lightgray;
-  font-size: 20px;
-  max-width:60%;
-  min-height:2rem;
-  margin-bottom:5px;
-}
-.list-item-button:hover{
-  cursor:pointer;
 }

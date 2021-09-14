@@ -6,7 +6,7 @@ const toDoList = document.getElementsByClassName('list-div')[0];
 const headDiv = document.getElementsByClassName('to-do-head')[0];
 let listHeader  = document.createElement('h2');
 
-toDoList.appendChild(doList);
+//toDoList.appendChild(doList);
 
 //Chooses Active Folder
 
@@ -33,12 +33,17 @@ function changeActive(button){
   }
 }
 
-function displayList(e){
+function displayList(){
   doList.innerHTML = "";
-  listHeader.textContent = e.target.textContent;
-  headDiv.appendChild(listHeader);
-  getList();
-  return headDiv;
+  let folderButtons = document.querySelectorAll('.project-button')
+  for (let i = 0; i < folderButtons.length; i++){
+    if (folderButtons[i].classList.contains('active')){
+      listHeader.textContent = folderButtons[i].textContent;
+    }
+  }
+    headDiv.appendChild(listHeader);
+    getList();
+    return headDiv;
 }
 
 function getList(){ 
@@ -52,20 +57,25 @@ function getList(){
          array.push(projectArray[i].list);
           for (let i = 0; i < array[0].length; i++){
             let listItem = document.createElement('div');
-            listItem.classList.add('list-item-button');
-            listItem.textContent = array[0][i];
+            listItem.classList.add('list-item-div');
+            
+            let removeItem = document.createElement('button');
+            removeItem.textContent = "x";
+            removeItem.classList.add('remove-item')
+            let listButton = document.createElement('div');
+            listButton.classList.add('list-button');
+            listButton.textContent = array[0][i];
+            
+            listItem.appendChild(removeItem);
+            listItem.appendChild(listButton);
             doList.appendChild(listItem);
           }
           return doList; 
         }
-        
       } 
-      
     }
-   
+   }
   }
-}
-
 
 class ProjectList{
   constructor(name){

@@ -137,6 +137,7 @@ function inputListeners(){
   listButton.addEventListener("click",addItemInput);
   closeListInput.addEventListener("click",closeItemInput);
   addListInput.addEventListener("click",createListItem);
+  addListInput.addEventListener("click",displayList);
 }
 
 export {
