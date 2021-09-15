@@ -12,6 +12,7 @@ import {
 
 //Tracking Projects
 const projectsFolder = document.getElementsByClassName('project-list')[0];
+let projectArray = [];
 
 //Left Div Input. (Buttons and Inputs involved with creating new project folder)
 const addButton = document.getElementById('add-button');
@@ -27,34 +28,47 @@ const listInputVal = document.getElementsByClassName('list-input-value')[0];
 const addListInput = document.getElementsByClassName('new-item')[0];
 const closeListInput = document.getElementsByClassName('close-item')[0];
 
+
 //Display input to add new project folder. (Left Div)
 function addProjectInput (){
-    addButton.classList.add('add-after');
-    inputDiv.classList.remove('input-box');
-    inputDiv.classList.add('input-after');
+  addButton.classList.add('add-after');
+  inputDiv.classList.remove('input-box');
+  inputDiv.classList.add('input-after');
 } 
 
 //Close input to add new project folder. (Left Div)
 function closeProjectInput(){
-    inputDiv.classList.remove('input-after');
-    inputDiv.classList.add('input-box');
-    addButton.classList.remove('add-after');
-    inputVal.value = "";
-  }
+  inputDiv.classList.remove('input-after');
+  inputDiv.classList.add('input-box');
+  addButton.classList.remove('add-after');
+  inputVal.value = "";
+}
 
+  // Display input to add new list item. (Right Div)
+function addItemInput (){
+  listButton.classList.add('add-after');
+  listInput.classList.remove('list-input-box');
+  listInput.classList.add('list-input-after');
+}
 
-let projectArray = [];
+//Close input to add new list item. (Right Div)
+function closeItemInput(){
+  listInput.classList.remove('list-input-after');
+  listInput.classList.add('list-input-box');
+  listButton.classList.remove('add-after');
+  listInputVal.value = "";
+}
 
 //Create new project folder. (Left Div)
 function createProject(){
   for (let i = 0; i < arrayCheck.length; i++){
-    if (inputVal.value == arrayCheck[i]){
-      return alert ("Can't have same folder twice!");
-    }
-  } if (inputVal.value === ""){
+  if (inputVal.value == arrayCheck[i]){
+    return alert ("Can't have same folder twice!");
+  }
+} 
+  if (inputVal.value === ""){
       alert("Enter project name");
-    
-  } else {
+  }else{
     let folderDiv = document.createElement('div');
     folderDiv.classList.add('folder-div');
     
@@ -84,49 +98,31 @@ function createProject(){
     inputDiv.classList.add('input-box');
     addButton.classList.remove('add-after');
     }
-
- }
-// Display input to add new list item. (Right Div)
-function addItemInput (){
-  listButton.classList.add('add-after');
-  listInput.classList.remove('list-input-box');
-  listInput.classList.add('list-input-after');
-}
-
-//Close input to add new list item. (Right Div)
-function closeItemInput(){
-  listInput.classList.remove('list-input-after');
-  listInput.classList.add('list-input-box');
-  listButton.classList.remove('add-after');
-  listInputVal.value = "";
-}
+  }
 
 //Create new list item. 
-
 function createListItem(){
   let folderButtons = document.querySelectorAll('.project-button');
   if (listInputVal.value === ""){
     alert("enter thing to do!")
-  } else {
-    let listItem = listInputVal.value
-    for (let i = 0; i < folderButtons.length; i++){
-      if (folderButtons[i].classList.contains("active")){
-        let list = folderButtons[i].textContent;
-         for(let i = 0; i < projectArray.length; i++){
-           if (list == projectArray[i].name){
-              projectArray[i].push(listItem);
-              listInput.classList.remove('list-input-after');
-              listInput.classList.add('list-input-box');
-              listButton.classList.remove('add-after');
-              listInputVal.value = "";
-            }
+  }else{
+  let listItem = listInputVal.value
+  for (let i = 0; i < folderButtons.length; i++){
+    if (folderButtons[i].classList.contains("active")){
+    let list = folderButtons[i].textContent;
+      for(let i = 0; i < projectArray.length; i++){
+        if (list == projectArray[i].name){
+          projectArray[i].push(listItem);
+          listInput.classList.remove('list-input-after');
+          listInput.classList.add('list-input-box');
+          listButton.classList.remove('add-after');
+          listInputVal.value = "";
           }
         }
       }
     }
   }
-
-
+}
 
 function inputListeners(){
   addButton.addEventListener("click",addProjectInput);

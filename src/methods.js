@@ -2,14 +2,10 @@ import {projectArray} from './inputs.js';
 
 //Project Title Div
 const doList = document.getElementsByClassName("to-do-list")[0];
-const toDoList = document.getElementsByClassName('list-div')[0];
 const headDiv = document.getElementsByClassName('to-do-head')[0];
 let listHeader  = document.createElement('h2');
 
-//toDoList.appendChild(doList);
-
 //Chooses Active Folder
-
 function stayActive(e){
   let btnName = e.target.textContent;
   if (e.target.classList.contains('inactive')){
@@ -21,8 +17,8 @@ function stayActive(e){
     e.target.classList.add('inactive');
   }
 };
-//Removes selected folder when new folder selected
 
+//Removes selected folder when new folder selected
 function changeActive(button){
   let folderButtons = document.querySelectorAll('.project-button');
   for(let i = 0; i < folderButtons.length; i++){
@@ -31,21 +27,23 @@ function changeActive(button){
       folderButtons[i].classList.add('inactive');
     }
   }
-}
+};
 
+//Appends correct list to page
 function displayList(){
   doList.innerHTML = "";
   let folderButtons = document.querySelectorAll('.project-button')
   for (let i = 0; i < folderButtons.length; i++){
     if (folderButtons[i].classList.contains('active')){
       listHeader.textContent = folderButtons[i].textContent;
+      }
     }
-  }
     headDiv.appendChild(listHeader);
     getList();
     return headDiv;
-}
+};
 
+//Gets correct div to append to page. 
 function getList(){ 
   let folderButtons = document.querySelectorAll('.project-button');
   let array = [];
@@ -61,11 +59,11 @@ function getList(){
             let removeItem = document.createElement('button');
             removeItem.textContent = "x";
             removeItem.classList.add('remove-item');
-            removeItem.addEventListener("click",deleteItem);
             let listButton = document.createElement('div');
             listButton.classList.add('list-button');
             listButton.textContent = array[0][i];
-            
+
+            removeItem.addEventListener("click",deleteItem);
             listItem.appendChild(removeItem);
             listItem.appendChild(listButton);
             doList.appendChild(listItem);
@@ -74,9 +72,33 @@ function getList(){
         }
       } 
     }
-   }
   }
+};
 
+//Deletes a list item from the list. 
+function deleteItem(e){
+  let folderButtons = document.querySelectorAll('.project-button');
+  let itemValue = e.target.nextSibling.textContent; 
+
+  for(let i = 0; i < folderButtons.length; i++){
+    if (folderButtons[i].classList.contains('active')){
+    let list = folderButtons[i].textContent;
+      for (let i = 0; i < projectArray.length;i++){
+        if (list == projectArray[i].name){
+        for (let j = 0; j < projectArray[i].list.length; j++){
+          if (itemValue == projectArray[i].list[j]){
+            let index = projectArray[i].list.indexOf(projectArray[i].list[j]);
+            projectArray[i].list.splice(index,1);
+            e.target.parentNode.parentNode.removeChild(e.target.parentNode);
+          }
+        }
+      }
+    }
+  }
+}
+}
+
+//Creates project list to store projects and corresponding lists.   
 class ProjectList{
   constructor(name){
     this.name = name;
@@ -88,31 +110,11 @@ class ProjectList{
   }
 }
 
-function deleteItem(e){
-  let folderButtons = document.querySelectorAll('.project-button');
-  let itemValue = e.target.nextSibling.textContent; 
-  console.log(itemValue);
-  for(let i = 0; i < folderButtons.length; i++){
-    if (folderButtons[i].classList.contains('active')){
-      let list = folderButtons[i].textContent;
-      for (let i = 0; i < projectArray.length;i++){
-        if (list == projectArray[i].name){
-          for (let j = 0; j < projectArray[i].list.length; j++){
-            if (itemValue == projectArray[i].list[j]){
-              let index = projectArray[i].list.indexOf(projectArray[i].list[j]);
-              projectArray[i].list.splice(index,1);
-              e.target.parentNode.parentNode.removeChild(e.target.parentNode);
-          }
-        }
-      }
-    }
-  }
-}
-}
-
 export{
   stayActive,
   changeActive,
   displayList,
+  headDiv,
+  doList,
   ProjectList
 };
