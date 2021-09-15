@@ -171,6 +171,8 @@ h2{
 
 /* RightDiv */
 
+/* List Item Display */ 
+
 .right-div{
   max-width: 100%;
   display:flex;
@@ -186,7 +188,40 @@ h2{
   top: 0;
 }
 
+.list-div{
+  max-width:60%;
+  min-width: 60%;
+  font-size: 1.2rem;
+  margin-left:0;
+}
+
+.to-do-list{
+  text-align: center;
+  min-width:100%;
+  border:1px solid black;
+  display:flex;
+  flex-direction: column;
+  justify-content: left;
+  margin:0;
+  padding:0;
+}
+
+.list-item-div{
+  display:inline-flex;
+  background-color: white;
+  font-size: 20px;
+  min-height:2rem;
+  margin-bottom:5px;
+  margin:0;
+  padding:0;
+}
+
+.list-item-div:hover{
+  cursor:pointer;
+}
+
 /*Section for the form - buttons and inputs that create new list items (Right-Div)*/
+
 /* Add Button (Right Div) */
 .button-add-item{
   height:2.5rem;
@@ -204,6 +239,22 @@ h2{
   border:1px solid darkgray;
   background-color: darkgray;
 }
+
+.list-button{
+  margin-left:1rem;
+  margin-right:2rem;
+  background-color: white;
+}
+
+.remove-item{
+  background-color: lightgray;
+  border: transparent;
+  font-size: 1.5rem;
+  line-height: 1rem;
+  margin-left:0;
+  max-height: 1.8rem;
+}
+
 
 /* List Item Creation Inputs and Input Form Dynamics */ 
 .new-item{
@@ -233,56 +284,6 @@ h2{
   font-size: 1.4rem;
   font-style: inherit;
 }
-/*Section for the form - buttons and inputs that create new list items (Right-Div)*/
-
-.list-div{
-  max-width:60%;
-  min-width: 60%;
-  font-size: 1.2rem;
-  margin-left:0;
-
-}
-
-.to-do-list{
-  text-align: center;
-  min-width:100%;
-  border:1px solid black;
-  display:flex;
-  flex-direction: column;
-  justify-content: left;
-  margin:0;
-  padding:0;
-}
-
-.list-item-div{
-  display:inline-flex;
-  background-color: white;
-  font-size: 20px;
-  min-height:2rem;
-  margin-bottom:5px;
-  margin:0;
-  padding:0;
-}
-
-.remove-item{
-  background-color: lightgray;
-  border: transparent;
-  font-size: 1.5rem;
-  line-height: 1rem;
-  margin-left:0;
-  max-height: 1.8rem;
-}
-
-.list-item-div:hover{
-  cursor:pointer;
-}
-
-.list-button{
-  margin-left:1rem;
-  margin-right:2rem;
-  background-color: white;
-}
-
 
 /* Toggle Active and Inactive buttons */ 
 .active{

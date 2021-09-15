@@ -47,21 +47,21 @@ function displayList(){
 }
 
 function getList(){ 
-  let array = [];
   let folderButtons = document.querySelectorAll('.project-button');
+  let array = [];
   for(let i = 0; i < folderButtons.length; i++){
     if (folderButtons[i].classList.contains('active')){
       let list = folderButtons[i].textContent;
       for (let i = 0; i < projectArray.length; i++){
         if (list == projectArray[i].name){
-         array.push(projectArray[i].list);
+          array.push(projectArray[i].list);
           for (let i = 0; i < array[0].length; i++){
             let listItem = document.createElement('div');
             listItem.classList.add('list-item-div');
-            
             let removeItem = document.createElement('button');
             removeItem.textContent = "x";
-            removeItem.classList.add('remove-item')
+            removeItem.classList.add('remove-item');
+            removeItem.addEventListener("click",deleteItem);
             let listButton = document.createElement('div');
             listButton.classList.add('list-button');
             listButton.textContent = array[0][i];
@@ -86,6 +86,28 @@ class ProjectList{
     this.list.push(item);
     return; 
   }
+}
+
+function deleteItem(e){
+  let folderButtons = document.querySelectorAll('.project-button');
+  let itemValue = e.target.nextSibling.textContent; 
+  console.log(itemValue);
+  for(let i = 0; i < folderButtons.length; i++){
+    if (folderButtons[i].classList.contains('active')){
+      let list = folderButtons[i].textContent;
+      for (let i = 0; i < projectArray.length;i++){
+        if (list == projectArray[i].name){
+          for (let j = 0; j < projectArray[i].list.length; j++){
+            if (itemValue == projectArray[i].list[j]){
+              let index = projectArray[i].list.indexOf(projectArray[i].list[j]);
+              projectArray[i].list.splice(index,1);
+              e.target.parentNode.parentNode.removeChild(e.target.parentNode);
+          }
+        }
+      }
+    }
+  }
+}
 }
 
 export{

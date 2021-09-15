@@ -23,7 +23,6 @@ const arrayCheck = [];
 
 function projFolder(project){
   projects[project.childNodes[0].firstChild.textContent] = project.childNodes[0].firstChild.textContent;
-  console.log(projects)
 }
 
 //Removes a project folder from project folder list.
@@ -40,7 +39,6 @@ function removeProject(e){
       }
       delete projects[key];
       e.target.parentNode.parentNode.removeChild(e.target.parentNode);
-      console.log(projects);
     }
   }
 }

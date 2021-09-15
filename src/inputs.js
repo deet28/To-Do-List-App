@@ -115,7 +115,6 @@ function createListItem(){
          for(let i = 0; i < projectArray.length; i++){
            if (list == projectArray[i].name){
               projectArray[i].push(listItem);
-              console.log(projectArray[i]);
               listInput.classList.remove('list-input-after');
               listInput.classList.add('list-input-box');
               listButton.classList.remove('add-after');
