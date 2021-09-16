@@ -8,7 +8,8 @@ import {
   stayActive,
   displayList,
   ProjectList,
-  headDiv
+  headDiv,
+  deleteAllFromAll
 } from './methods.js';
 
 //Tracking Projects
@@ -98,7 +99,9 @@ function createProject(){
     let deleteProj = document.createElement('button');
     deleteProj.textContent = "-";
     deleteProj.classList.add('delete-proj');
-    deleteProj.addEventListener("click",removeProject)
+    deleteProj.addEventListener("click",deleteAllFromAll);
+    deleteProj.addEventListener("click",removeProject);
+    
 
     folderDiv.appendChild(newFolder);
     folderDiv.appendChild(deleteProj);
@@ -119,21 +122,21 @@ function createListItem(){
   }else{
   let listItem = listInputVal.value
   for (let i = 0; i < folderButtons.length; i++){
-    if (folderButtons[i].classList.contains("active")){
-    let list = folderButtons[i].textContent;
-      for(let i = 0; i < projectArray.length; i++){
-        if (list == projectArray[i].name){
-          projectArray[i].push(listItem);
-          allFolder.list.push(`${listItem}`+ " " + `(${projectArray[i].name})`);
-          listInput.classList.remove('list-input-after');
-          listInput.classList.add('list-input-box');
-          listButton.classList.remove('add-after');
-          listInputVal.value = "";
-          }
+  if (folderButtons[i].classList.contains("active")){
+  let list = folderButtons[i].textContent;
+    for(let i = 0; i < projectArray.length; i++){
+    if (list == projectArray[i].name){
+      projectArray[i].push(listItem);
+      allFolder.list.push(`${listItem}`+ " " + `(${projectArray[i].name})`);
+      listInput.classList.remove('list-input-after');
+      listInput.classList.add('list-input-box');
+      listButton.classList.remove('add-after');
+      listInputVal.value = "";
         }
       }
     }
   }
+}
 }
 //Does not allow to add item to general items folder. 
 
@@ -144,8 +147,6 @@ function removeAdd(){
     listButton.classList.remove('add-after');
   }
 }
-
-
 
 function inputListeners(){
   addButton.addEventListener("click",addProjectInput);

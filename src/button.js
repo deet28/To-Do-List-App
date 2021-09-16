@@ -1,5 +1,5 @@
 import {projectArray, allFolder} from './inputs.js'
-import {stayActive, displayList,headDiv,doList} from './methods.js'
+import {stayActive, displayList,removeHeader,getAll, deleteAllFromAll} from './methods.js'
 
 //Default Buttons
 const allButton = document.getElementById('all-button');
@@ -21,7 +21,6 @@ const projects = {};
 const arrayCheck = [];
 
 //function that creates a new object with corresponding value pairs from arrayCheck.
-//can't decide if this is entirely neccessary? 
 function projFolder(project){
   projects[project.childNodes[0].firstChild.textContent] = project.childNodes[0].firstChild.textContent;
 }
@@ -34,25 +33,15 @@ function removeProject(e){
   for (const key in projects){
   if (e.target.parentNode.firstChild.textContent == projects[key]){
     for(let i = 0; i < arrayCheck.length; i++){
-      if (arrayCheck[i] === projects[key]){
-        delete arrayCheck[i];
-        delete projects[key];
+    if (arrayCheck[i] === projects[key]){
+      delete arrayCheck[i];
+      delete projects[key];
       }
     }
       removeHeader(e);
       removeFullProject(e);
+      deleteAllFromAll(e)
       e.target.parentNode.parentNode.removeChild(e.target.parentNode);
-    }
-  }
-}
-
-// Removes header from list when project deleted whose header is on page. 
-function removeHeader(e){
-  let folderButtons = document.querySelectorAll('.project-button');
-  for(let i = 0; i < folderButtons.length;i++){
-    if (folderButtons[i].classList.contains('active')&& folderButtons[i].textContent == e.target.parentNode.firstChild.textContent){
-      headDiv.textContent = "";
-      doList.textContent = "";
     }
   }
 }
@@ -62,20 +51,21 @@ function removeFullProject(e){
   let removedProject = e.target.parentNode.firstChild.textContent
   for (let i = 0; i < projectArray.length; i++){
   if (removedProject == projectArray[i].name){
-    projectArray[i].list.splice(0);
-    removeFromAll(removedProject);
+    projectArray.splice(projectArray[i]);
+    //removeFromAll(removedProject);
     }
   }
 }
-function removeFromAll(item){
-  for (let i = 0; i < allFolder.length; i++){
-    if (allFolder[i].includes(`(${item})`)){
-      doList.removeChild(item.parentNode);
-  
-// delete all parentnodes that contain ('projectfolder' title).
-  }
-}
-}
+
+
+//don't think I need this?
+//function removeFromAll(item){
+//  for (let i = 0; i < allFolder.length; i++){
+//    if (allFolder[i].includes(`(${item})`)){
+//      doList.removeChild(item.parentNode);
+//  }
+//}
+//}
 
 function buttonListeners(){
   allButton.addEventListener("click",stayActive);
@@ -92,4 +82,5 @@ export {
   buttonListeners,
   arrayCheck,
   projects,
+  allButton
 }
