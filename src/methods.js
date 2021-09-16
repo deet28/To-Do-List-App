@@ -1,4 +1,4 @@
-import {projectArray} from './inputs.js';
+import {projectArray, allFolder,removeAdd} from './inputs.js';
 
 //Project Title Div
 const doList = document.getElementsByClassName("to-do-list")[0];
@@ -36,9 +36,10 @@ function displayList(){
   for (let i = 0; i < folderButtons.length; i++){
     if (folderButtons[i].classList.contains('active')){
       listHeader.textContent = folderButtons[i].textContent;
-      }
     }
+  }
     headDiv.appendChild(listHeader);
+    removeAdd();
     getList();
     return headDiv;
 };
@@ -50,6 +51,8 @@ function getList(){
   for(let i = 0; i < folderButtons.length; i++){
     if (folderButtons[i].classList.contains('active')){
       let list = folderButtons[i].textContent;
+      if(list == "All Items"){getAll();
+      } else {
       for (let i = 0; i < projectArray.length; i++){
         if (list == projectArray[i].name){
           array.push(projectArray[i].list);
@@ -69,17 +72,32 @@ function getList(){
             doList.appendChild(listItem);
           }
           return doList; 
+          }
         }
       } 
     }
   }
 };
 
-//Deletes a list item from the list. 
+//All items list displays items from all project folders
+
+function getAll(){
+    for (let i = 0; i < allFolder.list.length; i++){
+    let listItem = document.createElement('div');
+    listItem.classList.add('list-item-div');
+    let listButton = document.createElement('div');
+    listButton.textContent = allFolder.list[i];
+    listItem.appendChild(listButton);
+    doList.appendChild(listItem);
+  }
+  return doList;
+}
+
+//Deletes a list item from project folder list. 
 function deleteItem(e){
   let folderButtons = document.querySelectorAll('.project-button');
   let itemValue = e.target.nextSibling.textContent; 
-
+  
   for(let i = 0; i < folderButtons.length; i++){
     if (folderButtons[i].classList.contains('active')){
     let list = folderButtons[i].textContent;
@@ -89,6 +107,7 @@ function deleteItem(e){
           if (itemValue == projectArray[i].list[j]){
             let index = projectArray[i].list.indexOf(projectArray[i].list[j]);
             projectArray[i].list.splice(index,1);
+            deleteFromAll(itemValue,list);
             e.target.parentNode.parentNode.removeChild(e.target.parentNode);
           }
         }
@@ -96,6 +115,18 @@ function deleteItem(e){
     }
   }
 }
+}
+
+//deleting one item at a time from project folders also removes it from All Items folder. 
+function deleteFromAll(item, project){
+  for (let i = 0; i < allFolder.list.length; i++){
+      if (`${item}`+ " " + `(${project})` == allFolder.list[i]){
+      let listItem  = `${item}`+ " " + `(${project})` 
+      let index = allFolder.list.indexOf(listItem);
+      allFolder.list.splice(index,1);
+      console.log(allFolder.list);
+    }
+  }
 }
 
 //Creates project list to store projects and corresponding lists.   

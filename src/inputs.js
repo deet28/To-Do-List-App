@@ -7,7 +7,8 @@ import {
 import {
   stayActive,
   displayList,
-  ProjectList
+  ProjectList,
+  headDiv
 } from './methods.js';
 
 //Tracking Projects
@@ -27,6 +28,16 @@ const listInput = document.getElementsByClassName('list-input-box')[0];
 const listInputVal = document.getElementsByClassName('list-input-value')[0];
 const addListInput = document.getElementsByClassName('new-item')[0];
 const closeListInput = document.getElementsByClassName('close-item')[0];
+
+//All, Today, This Week, project folders. 
+
+const allFolder = new ProjectList("All Items");
+const todayFolder = new ProjectList("Today");
+const weekFolder = new ProjectList("This week");
+
+projectArray.push(allFolder);
+projectArray.push(todayFolder);
+projectArray.push(weekFolder);
 
 
 //Display input to add new project folder. (Left Div)
@@ -113,6 +124,7 @@ function createListItem(){
       for(let i = 0; i < projectArray.length; i++){
         if (list == projectArray[i].name){
           projectArray[i].push(listItem);
+          allFolder.list.push(`${listItem}`+ " " + `(${projectArray[i].name})`);
           listInput.classList.remove('list-input-after');
           listInput.classList.add('list-input-box');
           listButton.classList.remove('add-after');
@@ -123,6 +135,17 @@ function createListItem(){
     }
   }
 }
+//Does not allow to add item to general items folder. 
+
+function removeAdd(){
+  if (headDiv.textContent == "All Items"){
+    listButton.classList.add('add-after')
+  } else {
+    listButton.classList.remove('add-after');
+  }
+}
+
+
 
 function inputListeners(){
   addButton.addEventListener("click",addProjectInput);
@@ -137,5 +160,8 @@ function inputListeners(){
 
 export {
   inputListeners,
-  projectArray
+  removeAdd,
+  projectArray,
+  allFolder,
+  listButton
 };

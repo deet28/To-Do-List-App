@@ -1,4 +1,4 @@
-import {projectArray} from './inputs.js'
+import {projectArray, allFolder} from './inputs.js'
 import {stayActive, displayList,headDiv,doList} from './methods.js'
 
 //Default Buttons
@@ -29,17 +29,6 @@ function projFolder(project){
 //Removes a project folder from project folder list.
 //Removes array item associated with that project folder (arrayCheck) 
 //Now also removes item associated with object folder (projects)
-
-//function otherOne(e){
-//  for (let i = 0; i < arrayCheck.length; i++){
-//    if (e.target.parentNode.firstChild.textContent == arrayCheck[i]){
-//      delete arrayCheck[i];
-//    }
-//    removeHeader(e);
-//    removeFullProject(e);
-//    e.target.parentNode.parentNode.removeChild(e.target.parentNode);
-//  }
-//}
 
 function removeProject(e){
   for (const key in projects){
@@ -73,9 +62,19 @@ function removeFullProject(e){
   let removedProject = e.target.parentNode.firstChild.textContent
   for (let i = 0; i < projectArray.length; i++){
   if (removedProject == projectArray[i].name){
-    return projectArray[i].list.splice(0);
+    projectArray[i].list.splice(0);
+    removeFromAll(removedProject);
     }
   }
+}
+function removeFromAll(item){
+  for (let i = 0; i < allFolder.length; i++){
+    if (allFolder[i].includes(`(${item})`)){
+      doList.removeChild(item.parentNode);
+  
+// delete all parentnodes that contain ('projectfolder' title).
+  }
+}
 }
 
 function buttonListeners(){
