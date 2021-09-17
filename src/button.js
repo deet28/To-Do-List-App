@@ -23,6 +23,7 @@ const arrayCheck = [];
 //function that creates a new object with corresponding value pairs from arrayCheck.
 function projFolder(project){
   projects[project.childNodes[0].firstChild.textContent] = project.childNodes[0].firstChild.textContent;
+  return projects;
 }
 
 //Removes a project folder from project folder list.
@@ -33,14 +34,14 @@ function removeProject(e){
   for (const key in projects){
   if (e.target.parentNode.firstChild.textContent == projects[key]){
     for(let i = 0; i < arrayCheck.length; i++){
-    if (arrayCheck[i] === projects[key]){
+    if (arrayCheck[i] == projects[key]){
       delete arrayCheck[i];
       delete projects[key];
       }
     }
+      deleteAllFromAll(e);
       removeHeader(e);
-      removeFullProject(e);
-      deleteAllFromAll(e)
+      removeFullProject(e)
       e.target.parentNode.parentNode.removeChild(e.target.parentNode);
     }
   }
@@ -51,8 +52,8 @@ function removeFullProject(e){
   let removedProject = e.target.parentNode.firstChild.textContent
   for (let i = 0; i < projectArray.length; i++){
   if (removedProject == projectArray[i].name){
-    projectArray.splice(projectArray[i]);
-    //removeFromAll(removedProject);
+    projectArray.splice(projectArray[i],1);
+    console.log(projectArray);
     }
   }
 }
@@ -78,6 +79,7 @@ function buttonListeners(){
 
 export {
   removeProject,
+  removeFullProject,
   projFolder,
   buttonListeners,
   arrayCheck,

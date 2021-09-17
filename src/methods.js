@@ -37,11 +37,12 @@ function displayList(){
   for (let i = 0; i < folderButtons.length; i++){
     if (folderButtons[i].classList.contains('active')){
       listHeader.textContent = folderButtons[i].textContent;
+      getList();
     }
   }
     headDiv.appendChild(listHeader);
     removeAdd();
-    getList();
+    
     return headDiv;
 };
 
@@ -53,6 +54,7 @@ function getList(){
   if (folderButtons[i].classList.contains('active')){
     let list = folderButtons[i].textContent;
     if(list == "All Items"){getAll();
+      console.log(list);
     } else {
     for (let i = 0; i < projectArray.length; i++){
     if (list == projectArray[i].name){
@@ -66,9 +68,8 @@ function getList(){
         let listButton = document.createElement('div');
         listButton.classList.add('list-button');
         listButton.textContent = array[0][i];
-        removeItem.addEventListener("click",deleteAllFromAll);
-        removeItem.addEventListener("click",deleteFromAll);
         removeItem.addEventListener("click",deleteItem);
+        removeItem.addEventListener("click",deleteFromAll);
         
         listItem.appendChild(removeItem);
         listItem.appendChild(listButton);
@@ -108,7 +109,7 @@ function deleteItem(e){
       for (let j = 0; j < projectArray[i].list.length; j++){
       if (itemValue == projectArray[i].list[j]){
         let index = projectArray[i].list.indexOf(projectArray[i].list[j]);
-        projectArray[i].list.splice(index);
+        projectArray[i].list.splice(index,1);
         deleteFromAll(itemValue,list);
         e.target.parentNode.parentNode.removeChild(e.target.parentNode);
         }
@@ -132,21 +133,24 @@ function deleteFromAll(item, project){
 }
 
 function deleteAllFromAll(e){
+  let array = [];
+  let tested;
   let list = e.target.parentNode.firstChild.textContent;
   let folderButtons = document.querySelectorAll('.project-button');
   for (let i = 0; i < folderButtons.length; i++){
   if (list == folderButtons[i].textContent){
       for (let i = 0; i < allFolder.list.length;i++){
-      if (allFolder.list[i].endsWith(`(${list})`)){
-          let index = allFolder.list.indexOf(allFolder.list[i]);
-          allFolder.list.splice(index,1);
+      if (!(allFolder.list[i].endsWith(`(${list})`))){
+          tested = allFolder.list[i]; 
+          array.push(tested);
         }
-        return allFolder.list;
       }
-      
+      allFolder.list = array;
+      console.log(allFolder.list);
     }
   }
 }
+
 // Removes header and list when project deleted whose header and list is on page.
 function removeHeader(e){
   let folderButtons = document.querySelectorAll('.project-button');

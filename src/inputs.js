@@ -9,7 +9,6 @@ import {
   displayList,
   ProjectList,
   headDiv,
-  deleteAllFromAll
 } from './methods.js';
 
 //Tracking Projects
@@ -91,6 +90,7 @@ function createProject(){
     newFolder.textContent = inputVal.value;
     let itemList = new ProjectList(newFolder.textContent);
     projectArray.push(itemList);
+    console.log(projectArray);
     
     newFolder.addEventListener("click",stayActive);
     newFolder.addEventListener("click",displayList);
@@ -99,7 +99,6 @@ function createProject(){
     let deleteProj = document.createElement('button');
     deleteProj.textContent = "-";
     deleteProj.classList.add('delete-proj');
-    deleteProj.addEventListener("click",deleteAllFromAll);
     deleteProj.addEventListener("click",removeProject);
     
 
