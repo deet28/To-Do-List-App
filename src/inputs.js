@@ -39,12 +39,17 @@ projectArray.push(allFolder);
 projectArray.push(todayFolder);
 projectArray.push(weekFolder);
 
-
 //Display input to add new project folder. (Left Div)
 function addProjectInput (){
   addButton.classList.add('add-after');
   inputDiv.classList.remove('input-box');
   inputDiv.classList.add('input-after');
+  if (listInput.classList.contains('list-input-after')){
+    listInput.classList.remove('list-input-after');
+    listInput.classList.add('list-input-box');
+    listButton.classList.remove('add-after');
+    listInputVal.value = ""
+  }
 } 
 
 //Close input to add new project folder. (Left Div)
@@ -60,7 +65,14 @@ function addItemInput (){
   listButton.classList.add('add-after');
   listInput.classList.remove('list-input-box');
   listInput.classList.add('list-input-after');
+  if (inputDiv.classList.contains('input-after')){
+    inputDiv.classList.remove('input-after');
+    inputDiv.classList.add('input-box');
+    addButton.classList.remove('add-after');
+    inputVal.value = "";
+  }
 }
+
 
 //Close input to add new list item. (Right Div)
 function closeItemInput(){

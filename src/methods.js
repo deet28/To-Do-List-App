@@ -1,5 +1,5 @@
 import {projectArray, allFolder,removeAdd} from './inputs.js';
-import{allButton} from './button.js'
+import{} from './button.js'
 
 //Project Title Div
 const doList = document.getElementsByClassName("to-do-list")[0];
@@ -119,6 +119,11 @@ function deleteItem(e){
   }
 }
 }
+
+//getToday(){
+  //iterates through all items list, appends list items who's days match
+  //today. 
+//}
 //deleting one item at a time from project folders also removes it from All Items folder. 
 function deleteFromAll(item, project){
   for (let i = 0; i < allFolder.list.length; i++){

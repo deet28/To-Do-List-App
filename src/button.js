@@ -59,15 +59,6 @@ function removeFullProject(e){
 }
 
 
-//don't think I need this?
-//function removeFromAll(item){
-//  for (let i = 0; i < allFolder.length; i++){
-//    if (allFolder[i].includes(`(${item})`)){
-//      doList.removeChild(item.parentNode);
-//  }
-//}
-//}
-
 function buttonListeners(){
   allButton.addEventListener("click",stayActive);
   allButton.addEventListener("click",displayList);
