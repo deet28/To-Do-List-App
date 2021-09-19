@@ -1,5 +1,5 @@
 import {projectArray, allFolder} from './inputs.js'
-import {stayActive, displayList,removeHeader,getAll, deleteAllFromAll} from './methods.js'
+import {stayActive, displayList,removeHeader, getList, deleteAllFromAll} from './methods.js'
 
 //Default Buttons
 const allButton = document.getElementById('all-button');
@@ -53,8 +53,14 @@ function removeFullProject(e){
   for (let i = 0; i < projectArray.length; i++){
   if (removedProject == projectArray[i].name){
     projectArray.splice(projectArray[i],1);
-    console.log(projectArray);
+    deleteFromAllList();
     }
+  }
+}
+
+function deleteFromAllList(){
+  if (allButton.classList.contains('active')){
+    displayList();
   }
 }
 

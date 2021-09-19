@@ -70,10 +70,16 @@ function getList(){
         listButton.textContent = array[0][i];
         removeItem.addEventListener("click",deleteItem);
         removeItem.addEventListener("click",deleteFromAll);
+
+        let dateDiv = document.createElement('div');
+        let date = document.createElement('INPUT');
+        date.setAttribute('type','date');
         
         listItem.appendChild(removeItem);
         listItem.appendChild(listButton);
+        dateDiv.appendChild(date);
         doList.appendChild(listItem);
+        doList.appendChild(dateDiv);
         }
         return doList; 
         }
@@ -111,6 +117,7 @@ function deleteItem(e){
         let index = projectArray[i].list.indexOf(projectArray[i].list[j]);
         projectArray[i].list.splice(index,1);
         deleteFromAll(itemValue,list);
+        e.target.parentNode.parentNode.removeChild(e.target.parentNode.nextSibling);
         e.target.parentNode.parentNode.removeChild(e.target.parentNode);
         }
       }
@@ -186,6 +193,7 @@ export{
   removeHeader,
   deleteAllFromAll,
   getAll,
+  getList,
   headDiv,
   doList,
   ProjectList
