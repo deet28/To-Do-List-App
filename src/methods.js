@@ -1,5 +1,5 @@
 import {projectArray, allFolder,removeAdd} from './inputs.js';
-import{} from './button.js'
+import{} from './button.js';
 
 //Project Title Div
 const doList = document.getElementsByClassName("to-do-list")[0];
@@ -49,17 +49,15 @@ function displayList(){
 //Gets correct div to append to page. 
 function getList(){ 
   let folderButtons = document.querySelectorAll('.project-button');
-  let array = [];
   for(let i = 0; i < folderButtons.length; i++){
   if (folderButtons[i].classList.contains('active')){
     let list = folderButtons[i].textContent;
     if(list == "All Items"){getAll();
-      console.log(list);
     } else {
     for (let i = 0; i < projectArray.length; i++){
     if (list == projectArray[i].name){
-      array.push(projectArray[i].list);
-        for (let i = 0; i < array[0].length; i++){
+        for (let j = 0; j < projectArray[i].list.length; j++){
+          //list items
         let listItem = document.createElement('div');
         listItem.classList.add('list-item-div');
         let removeItem = document.createElement('button');
@@ -67,19 +65,30 @@ function getList(){
         removeItem.classList.add('remove-item');
         let listButton = document.createElement('div');
         listButton.classList.add('list-button');
-        listButton.textContent = array[0][i];
+        listButton.textContent = projectArray[i].list[j];
         removeItem.addEventListener("click",deleteItem);
         removeItem.addEventListener("click",deleteFromAll);
-
-        let dateDiv = document.createElement('div');
-        let date = document.createElement('INPUT');
+          
+          //dates for list items
+        let dateInputDiv = document.createElement('div');
+        let date = document.createElement('input');
         date.setAttribute('type','date');
+        date.addEventListener("input",showDate);
+        let dateDisplay = document.createElement('div');
+        dateDisplay.classList.add('date-display');
+          let thisDate = projectArray[i].dates[j];
+           if(thisDate == undefined){
+            dateDisplay.textContent = `(No Date)`;
+            }else{
+            dateDisplay.textContent = ` (${projectArray[i].dates[j]})`;
+            }
         
         listItem.appendChild(removeItem);
         listItem.appendChild(listButton);
-        dateDiv.appendChild(date);
+        listItem.appendChild(dateDisplay);
+        dateInputDiv.appendChild(date);
         doList.appendChild(listItem);
-        doList.appendChild(dateDiv);
+        doList.appendChild(dateInputDiv);
         }
         return doList; 
         }
@@ -88,6 +97,37 @@ function getList(){
   }
 }
 };
+
+//created function in project class to add date. 
+//only adding date to first list item?
+//also not erasing old date and replacing with new one. 
+
+//are not changing dates from other project list items. but all other project list items are having same problems as above (respective to themselves)
+
+function showDate(e){
+  let listThing = e.target.parentNode.previousElementSibling.firstChild.nextSibling.textContent; 
+  console.log(listThing);
+  let folderButtons = document.querySelectorAll('.project-button');
+  for (let i = 0; i < folderButtons.length; i++){
+    if (folderButtons[i].classList.contains('active')){
+      let currentProject = folderButtons[i].textContent;
+        for (let i = 0; i < projectArray.length; i++){
+        if (currentProject == projectArray[i].name){
+          for (let j = 0; j < projectArray[i].list.length; j++){
+            if (listThing === projectArray[i].list[j]){
+              let indexed = projectArray[i].list.indexOf(listThing);
+              console.log(indexed);
+              let newDate = e.target.value;
+              projectArray[i].add(indexed,newDate);
+              console.log(projectArray[i]);
+              displayList();
+            }
+          }
+        }
+      }
+    }
+  }
+}
 
 //All items list displays items from all project folders
 function getAll(){
@@ -116,6 +156,7 @@ function deleteItem(e){
       if (itemValue == projectArray[i].list[j]){
         let index = projectArray[i].list.indexOf(projectArray[i].list[j]);
         projectArray[i].list.splice(index,1);
+        projectArray[i].dates.splice(index,1);
         deleteFromAll(itemValue,list);
         e.target.parentNode.parentNode.removeChild(e.target.parentNode.nextSibling);
         e.target.parentNode.parentNode.removeChild(e.target.parentNode);
@@ -127,11 +168,6 @@ function deleteItem(e){
 }
 }
 
-//getToday(){
-  //iterates through all items list, appends list items who's days match
-  //today. 
-//}
-//deleting one item at a time from project folders also removes it from All Items folder. 
 function deleteFromAll(item, project){
   for (let i = 0; i < allFolder.list.length; i++){
   if (`${item}`+ " " + `(${project})` == allFolder.list[i]){
@@ -179,10 +215,15 @@ class ProjectList{
   constructor(name){
     this.name = name;
     this.list = [];
+    this.dates = [];
   }
   push(item){
     this.list.push(item);
     return; 
+  }
+  add(index,date){
+    this.dates[index] = date;
+    return
   }
 }
 

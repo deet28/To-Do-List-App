@@ -86,11 +86,12 @@ function closeItemInput(){
 function createProject(){
   for (let i = 0; i < arrayCheck.length; i++){
   if (inputVal.value == arrayCheck[i]){
-    return alert ("Can't have same folder twice!");
+    closeProjectInput();
+    return alert ("Project already listed");
   }
 } 
   if (inputVal.value === ""){
-      alert("Enter project name");
+   return alert("Enter project name");
   }else{
     let folderDiv = document.createElement('div');
     folderDiv.classList.add('folder-div');
@@ -129,8 +130,12 @@ function createProject(){
 function createListItem(){
   let folderButtons = document.querySelectorAll('.project-button');
   if (listInputVal.value === ""){
-    alert("enter thing to do!")
-  }else{
+    alert("enter thing to do!");
+  } else if (noDoubles(listInputVal.value)){
+    closeItemInput();
+    return alert ('You already have this to-do listed.');
+  }
+  else{
   let listItem = listInputVal.value
   for (let i = 0; i < folderButtons.length; i++){
   if (folderButtons[i].classList.contains("active")){
@@ -148,6 +153,24 @@ function createListItem(){
     }
   }
 }
+}
+
+function noDoubles(item){
+  let folderButtons = document.querySelectorAll('.project-button');
+  for (let i = 0; i < folderButtons.length; i++){
+    if (folderButtons[i].classList.contains('active')){
+      let list = folderButtons[i].textContent;
+      for (let i = 0; i < projectArray.length; i++){
+        if (list == projectArray[i].name){
+          for (let j = 0; j < projectArray[i].list.length; j++){
+            if (item == projectArray[i].list[j]){
+             return true;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 //Does not allow to add item to general items folder. 
 
