@@ -52,9 +52,10 @@ function removeFullProject(e){
   let removedProject = e.target.parentNode.firstChild.textContent
   for (let i = 0; i < projectArray.length; i++){
   if (removedProject == projectArray[i].name){
-    projectArray.splice(projectArray[i],1);
+    let index = projectArray.indexOf(projectArray[i]);
+    projectArray.splice(index,1);
+  }
     deleteFromAllList();
-    }
   }
 }
 
