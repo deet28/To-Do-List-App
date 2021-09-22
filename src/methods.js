@@ -178,6 +178,7 @@ function deleteItem(e){
         projectArray[i].list.splice(index,1);
         projectArray[i].dates.splice(index,1);
         deleteFromAll(itemValue,list);
+        deleteFromToday(itemValue,list);
         e.target.parentNode.parentNode.removeChild(e.target.parentNode.nextSibling);
         e.target.parentNode.parentNode.removeChild(e.target.parentNode);
         }
@@ -214,7 +215,35 @@ function deleteAllFromAll(e){
         }
       }
       allFolder.list = array;
-      console.log(allFolder.list);
+    }
+  }
+}
+function deleteFromToday(item,project){
+  for (let i = 0; i < todayFolder.list.length; i++){
+    if (`${item}`+ " " + `(${project})` == todayFolder.list[i]){
+      let listItem  = `${item}`+ " " + `(${project})` 
+      let index = todayFolder.list.indexOf(listItem);
+      todayFolder.list.splice(index,1);
+      return todayFolder.list;
+      }
+      
+  }
+}
+
+function deleteAllFromToday(e){
+  let array = [];
+  let tested;
+  let list = e.target.parentNode.firstChild.textContent;
+  let folderButtons = document.querySelectorAll('.project-button');
+  for (let i = 0; i < folderButtons.length;i++){
+    if (list == folderButtons[i].textContent){
+      for(let i = 0; i < todayFolder.list.length; i++){
+        if (!(todayFolder.list[i].endsWith(`(${list})`))){
+          tested = todayFolder.list[i]; 
+          array.push(tested);
+        }
+      }
+      todayFolder.list = array;
     }
   }
 }
@@ -244,6 +273,7 @@ export{
   displayList,
   removeHeader,
   deleteAllFromAll,
+  deleteAllFromToday,
   getAll,
   getList,
   headDiv,
