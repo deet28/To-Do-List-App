@@ -1,4 +1,4 @@
-import {projectArray, allFolder,removeAdd} from './inputs.js';
+import {projectArray, allFolder,todayFolder,todayMaker,removeToday,removeAdd} from './inputs.js';
 import{} from './button.js';
 
 //Project Title Div
@@ -53,6 +53,7 @@ function getList(){
   if (folderButtons[i].classList.contains('active')){
     let list = folderButtons[i].textContent;
     if(list == "All Items"){getAll();
+    }else if(list == "Today"){getToday();
     } else {
     for (let i = 0; i < projectArray.length; i++){
     if (list == projectArray[i].name){
@@ -74,6 +75,9 @@ function getList(){
         let date = document.createElement('input');
         date.setAttribute('type','date');
         date.addEventListener("input",showDate);
+        date.addEventListener("input",removeToday);
+        date.addEventListener("input",todayMaker);
+        
         let dateDisplay = document.createElement('div');
         dateDisplay.classList.add('date-display');
           let thisDate = projectArray[i].dates[j];
@@ -98,36 +102,6 @@ function getList(){
 }
 };
 
-//created function in project class to add date. 
-//only adding date to first list item?
-//also not erasing old date and replacing with new one. 
-
-//are not changing dates from other project list items. but all other project list items are having same problems as above (respective to themselves)
-
-function showDate(e){
-  let listThing = e.target.parentNode.previousElementSibling.firstChild.nextSibling.textContent; 
-  console.log(listThing);
-  let folderButtons = document.querySelectorAll('.project-button');
-  for (let i = 0; i < folderButtons.length; i++){
-    if (folderButtons[i].classList.contains('active')){
-      let currentProject = folderButtons[i].textContent;
-        for (let i = 0; i < projectArray.length; i++){
-        if (currentProject == projectArray[i].name){
-          for (let j = 0; j < projectArray[i].list.length; j++){
-            if (listThing === projectArray[i].list[j]){
-              let indexed = projectArray[i].list.indexOf(listThing);
-              console.log(indexed);
-              let newDate = e.target.value;
-              projectArray[i].add(indexed,newDate);
-              console.log(projectArray[i]);
-              displayList();
-            }
-          }
-        }
-      }
-    }
-  }
-}
 
 //All items list displays items from all project folders
 function getAll(){
@@ -141,6 +115,52 @@ function getAll(){
     
   }
   return doList;
+}
+function getToday(){
+  for (let i = 0; i < todayFolder.list.length; i++){
+    let listItem = document.createElement('div');
+    listItem.classList.add('list-item-div');
+    let listButton = document.createElement('div');
+    listButton.textContent = todayFolder.list[i];
+    listItem.appendChild(listButton);
+    doList.appendChild(listItem);
+    
+  }
+  return doList;
+}
+
+function showDate(e){
+  let listThing = e.target.parentNode.previousElementSibling.firstChild.nextSibling.textContent; 
+  let folderButtons = document.querySelectorAll('.project-button');
+  for (let i = 0; i < folderButtons.length; i++){
+    if (folderButtons[i].classList.contains('active')){
+      let currentProject = folderButtons[i].textContent;
+        for (let i = 0; i < projectArray.length; i++){
+        if (currentProject == projectArray[i].name){
+          for (let j = 0; j < projectArray[i].list.length; j++){
+            if (listThing === projectArray[i].list[j]){
+              let indexed = projectArray[i].list.indexOf(listThing);
+              let newDate = e.target.value;
+              projectArray[i].add(indexed,newDate);
+              displayList();
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
+
+// Removes header and list when project deleted whose header and list is on page.
+function removeHeader(e){
+  let folderButtons = document.querySelectorAll('.project-button');
+  for(let i = 0; i < folderButtons.length;i++){
+    if (folderButtons[i].classList.contains('active')&& folderButtons[i].textContent == e.target.parentNode.firstChild.textContent){
+      headDiv.textContent = "";
+      doList.textContent = "";
+    }
+  }
 }
 
 //Deletes a list item from project folder list. 
@@ -199,16 +219,7 @@ function deleteAllFromAll(e){
   }
 }
 
-// Removes header and list when project deleted whose header and list is on page.
-function removeHeader(e){
-  let folderButtons = document.querySelectorAll('.project-button');
-  for(let i = 0; i < folderButtons.length;i++){
-    if (folderButtons[i].classList.contains('active')&& folderButtons[i].textContent == e.target.parentNode.firstChild.textContent){
-      headDiv.textContent = "";
-      doList.textContent = "";
-    }
-  }
-}
+
 
 //Creates project list to store projects and corresponding lists.   
 class ProjectList{

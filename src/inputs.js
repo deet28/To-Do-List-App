@@ -88,8 +88,8 @@ function createProject(){
   if (inputVal.value == arrayCheck[i]){
     closeProjectInput();
     return alert ("Project already listed");
-  }
-} 
+    }
+  } 
   if (inputVal.value === ""){
    return alert("Enter project name");
   }else{
@@ -172,12 +172,56 @@ function noDoubles(item){
     }
   }
 }
-//Does not allow to add item to general items folder. 
 
+//Pushes all list items to today folder. 
+function todayMaker(e){
+  let today = new Date();
+  let dd = String(today.getDate()).padStart(2, '0');
+  let mm = String(today.getMonth() + 1).padStart(2, '0');
+  let yyyy = today.getFullYear();
+  today =`${yyyy}-${mm}-${dd}`;
+
+  for (let i = 0; i < projectArray.length; i++){
+    for (let j = 0; j < projectArray[i].dates.length; j++){
+      if (projectArray[i].dates[j] == today){
+        let test = `${projectArray[i].list[j]}` + " " + `(${projectArray[i].name})`;
+        for (let i = 0; i <= todayFolder.list.length; i++){
+          if (todayFolder.list.includes(test) == false){
+            todayFolder.list.push(test);
+            }
+          }
+        }
+      }
+    }
+  }
+//Removes edited date items from today folder. 
+function removeToday(e){
+  let today = new Date();
+  let dd = String(today.getDate()).padStart(2, '0');
+  let mm = String(today.getMonth() + 1).padStart(2, '0');
+  let yyyy = today.getFullYear();
+  
+  today =`${yyyy}-${mm}-${dd}`;
+
+  for (let i = 0; i < projectArray.length; i++){
+    for (let j = 0; j < projectArray[i].list.length; j++){
+      if (!(projectArray[i].dates[j] == today)){
+        let test = `${projectArray[i].list[j]}` + " " + `(${projectArray[i].name})`;
+        for (let i = 0; i <= todayFolder.list.length; i++){
+          if (todayFolder.list.includes(test) == true){
+            let index = todayFolder.list.indexOf(test);
+            todayFolder.list.splice(index,1);
+          }
+        }
+      }
+    }
+  }
+}
+//Does not allow to add item to general items folder. 
 function removeAdd(){
-  if (headDiv.textContent == "All Items"){
+  if (headDiv.textContent == "All Items"||headDiv.textContent == "Today"){
     listButton.classList.add('add-after')
-  } else {
+    }else{
     listButton.classList.remove('add-after');
   }
 }
@@ -196,7 +240,10 @@ function inputListeners(){
 export {
   inputListeners,
   removeAdd,
+  todayMaker,
+  removeToday,
   projectArray,
   allFolder,
+  todayFolder,
   listButton
 };
