@@ -209,11 +209,8 @@ function weekMaker(input){
   let dd = String(today.getDate()).padStart(2, '0');
   let mm = String(today.getMonth() + 1).padStart(2, '0');
   let yyyy = String(today.getFullYear());
-  
   let dateToday = `${yyyy}-${mm}-${dd}`;
-  
   let array = [];
-  
   for (let i = 0; i < 7; i++){
   let newDate = today.getDate()+i;
     array.push(newDate);
@@ -292,6 +289,7 @@ export {
   todayMaker,
   removeToday,
   removeFromWeek,
+  closeItemInput,
   projectArray,
   allFolder,
   todayFolder,

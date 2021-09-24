@@ -219,7 +219,8 @@ h2{
 }
 
 .date-display{
-  font-size:14px;
+  font-size:12px;
+  min-width: 3rem;
 }
 
 /*Section for the form - buttons and inputs that create new list items (Right-Div)*/

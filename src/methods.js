@@ -1,4 +1,14 @@
-import {projectArray, allFolder,todayFolder,weekFolder,todayMaker,removeToday,removeFromWeek,removeAdd} from './inputs.js';
+import {
+  projectArray, 
+  allFolder,
+  todayFolder,
+  weekFolder,
+  todayMaker,
+  removeToday,
+  removeFromWeek,
+  removeAdd,
+  closeItemInput
+} from './inputs.js';
 import{} from './button.js';
 
 //Project Title Div
@@ -28,6 +38,7 @@ function changeActive(button){
     if (!(button == folderButtons[i].innerHTML)){
       folderButtons[i].classList.remove('active');
       folderButtons[i].classList.add('inactive');
+      closeItemInput();
     }
   }
 };
