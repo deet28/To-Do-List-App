@@ -1,4 +1,4 @@
-import {projectArray, allFolder,todayFolder,todayMaker,removeToday,removeAdd} from './inputs.js';
+import {projectArray, allFolder,todayFolder,weekFolder,todayMaker,removeToday,removeFromWeek,removeAdd} from './inputs.js';
 import{} from './button.js';
 
 //Project Title Div
@@ -54,7 +54,9 @@ function getList(){
     let list = folderButtons[i].textContent;
     if(list == "All Items"){getAll();
     }else if(list == "Today"){getToday();
-    } else {
+    } else if(list == "This week"){getWeek();
+    }
+    else {
     for (let i = 0; i < projectArray.length; i++){
     if (list == projectArray[i].name){
         for (let j = 0; j < projectArray[i].list.length; j++){
@@ -76,6 +78,7 @@ function getList(){
         date.setAttribute('type','date');
         date.addEventListener("input",showDate);
         date.addEventListener("input",removeToday);
+        date.addEventListener("input",removeFromWeek);
         date.addEventListener("input",todayMaker);
         
         let dateDisplay = document.createElement('div');
@@ -127,6 +130,18 @@ function getToday(){
     
   }
   return doList;
+}
+
+function getWeek(){
+  for (let i = 0; i < weekFolder.list.length; i++){
+    let listItem = document.createElement('div');
+    listItem.classList.add('list-item-div');
+    let listButton = document.createElement('div');
+    listButton.textContent = weekFolder.list[i];
+    listItem.appendChild(listButton);
+    doList.appendChild(listItem);
+  }
+  return doList
 }
 
 function showDate(e){

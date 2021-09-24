@@ -174,49 +174,98 @@ function noDoubles(item){
 }
 
 //Pushes all list items to today folder. 
-function todayMaker(e){
+function todayMaker(){
   let today = new Date();
   let dd = String(today.getDate()).padStart(2, '0');
   let mm = String(today.getMonth() + 1).padStart(2, '0');
   let yyyy = today.getFullYear();
   today =`${yyyy}-${mm}-${dd}`;
-
-  for (let i = 0; i < projectArray.length; i++){
+  
+    
+    for (let i = 0; i < projectArray.length; i++){
     for (let j = 0; j < projectArray[i].dates.length; j++){
-      if (projectArray[i].dates[j] == today){
+      if (projectArray[i].dates[j]!==today){
+        if (weekMaker(projectArray[i].dates[j]) == true && weekFolder.list.includes(`${projectArray[i].list[j]}` + " " + `(${projectArray[i].name})`) == false){
+          weekFolder.push(`${projectArray[i].list[j]}` + " " + `(${projectArray[i].name})`)
+        };
+      } 
+      else if (projectArray[i].dates[j] == today){
         let test = `${projectArray[i].list[j]}` + " " + `(${projectArray[i].name})`;
         for (let i = 0; i <= todayFolder.list.length; i++){
           if (todayFolder.list.includes(test) == false){
             todayFolder.list.push(test);
+            if(weekFolder.list.includes(test)==false){
+            weekFolder.list.push(test);
+            }
             }
           }
         }
       }
     }
   }
+
+function weekMaker(input){
+  let today = new Date();
+  let dd = String(today.getDate()).padStart(2, '0');
+  let mm = String(today.getMonth() + 1).padStart(2, '0');
+  let yyyy = String(today.getFullYear());
+  
+  let dateToday = `${yyyy}-${mm}-${dd}`;
+  
+  let array = [];
+  
+  for (let i = 0; i < 7; i++){
+  let newDate = today.getDate()+i;
+    array.push(newDate);
+  }
+  for (let i = 0; i < array.length; i++){
+    dateToday = `${yyyy}-${mm}-${array[i]}`;
+    if (dateToday == input){
+      return true;
+    } 
+  }
+}
 //Removes edited date items from today folder. 
-function removeToday(e){
+function removeToday(){
   let today = new Date();
   let dd = String(today.getDate()).padStart(2, '0');
   let mm = String(today.getMonth() + 1).padStart(2, '0');
   let yyyy = today.getFullYear();
-  
+      
   today =`${yyyy}-${mm}-${dd}`;
+    
+    for (let i = 0; i < projectArray.length; i++){
+      for (let j = 0; j < projectArray[i].list.length; j++){
+        if (!(projectArray[i].dates[j] == today)){
+          let test = `${projectArray[i].list[j]}` + " " + `(${projectArray[i].name})`;
+          for (let i = 0; i <= todayFolder.list.length; i++){
+            if (todayFolder.list.includes(test) == true){
+              let index = todayFolder.list.indexOf(test);
+              todayFolder.list.splice(index,1);
+            }
+          }
+        }
+      }
+    }
+  }
 
+function removeFromWeek(){
   for (let i = 0; i < projectArray.length; i++){
     for (let j = 0; j < projectArray[i].list.length; j++){
-      if (!(projectArray[i].dates[j] == today)){
+      if (!weekMaker(projectArray[i].dates[j])==true){
         let test = `${projectArray[i].list[j]}` + " " + `(${projectArray[i].name})`;
-        for (let i = 0; i <= todayFolder.list.length; i++){
-          if (todayFolder.list.includes(test) == true){
-            let index = todayFolder.list.indexOf(test);
-            todayFolder.list.splice(index,1);
+        for (let i = 0; i <= weekFolder.list.length; i++){
+          if (weekFolder.list.includes(test) == true){
+            let index = weekFolder.list.indexOf(test);
+            weekFolder.list.splice(index,1);
           }
         }
       }
     }
   }
 }
+
+
 //Does not allow to add item to general items folder. 
 function removeAdd(){
   if (headDiv.textContent == "All Items"||headDiv.textContent == "Today"){
@@ -242,8 +291,10 @@ export {
   removeAdd,
   todayMaker,
   removeToday,
+  removeFromWeek,
   projectArray,
   allFolder,
   todayFolder,
+  weekFolder,
   listButton
 };
