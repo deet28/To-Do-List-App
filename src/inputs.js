@@ -268,7 +268,7 @@ function removeFromWeek(){
 
 //Does not allow to add item to general items folder. 
 function removeAdd(){
-  if (headDiv.textContent == "All Items"||headDiv.textContent == "Today"){
+  if (headDiv.textContent === "All Items"||headDiv.textContent === "Today"||headDiv.textContent === "This week"){
     listButton.classList.add('add-after')
     }else{
     listButton.classList.remove('add-after');

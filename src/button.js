@@ -1,5 +1,5 @@
 import {projectArray, allFolder} from './inputs.js'
-import {stayActive, displayList,removeHeader, deleteAllFromToday, deleteAllFromAll} from './methods.js'
+import {stayActive, displayList,removeHeader, deleteAllFromToday, deleteAllFromWeek, deleteAllFromAll} from './methods.js'
 
 //Default Buttons
 const allButton = document.getElementById('all-button');
@@ -41,6 +41,7 @@ function removeProject(e){
     }
       deleteAllFromAll(e);
       deleteAllFromToday(e);
+      deleteAllFromWeek(e);
       removeHeader(e);
       removeFullProject(e)
       e.target.parentNode.parentNode.removeChild(e.target.parentNode);
@@ -64,6 +65,8 @@ function deleteFromList(){
   if (allButton.classList.contains('active')){
     displayList();
   } else if (todayButton.classList.contains('active')){
+    displayList();
+  } else if (weekButton.classList.contains('active')){
     displayList();
   }
 }

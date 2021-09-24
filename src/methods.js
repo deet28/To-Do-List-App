@@ -13,6 +13,8 @@ function stayActive(e){
     e.target.classList.remove('inactive');
     e.target.classList.add('active');
     changeActive(btnName);
+  } else if (e.target.classList.contains('active')){
+    return;
   } else {
     e.target.classList.remove('active');
     e.target.classList.add('inactive');
@@ -194,6 +196,7 @@ function deleteItem(e){
         projectArray[i].dates.splice(index,1);
         deleteFromAll(itemValue,list);
         deleteFromToday(itemValue,list);
+        deleteFromWeek(itemValue,list);
         e.target.parentNode.parentNode.removeChild(e.target.parentNode.nextSibling);
         e.target.parentNode.parentNode.removeChild(e.target.parentNode);
         }
@@ -233,6 +236,7 @@ function deleteAllFromAll(e){
     }
   }
 }
+
 function deleteFromToday(item,project){
   for (let i = 0; i < todayFolder.list.length; i++){
     if (`${item}`+ " " + `(${project})` == todayFolder.list[i]){
@@ -242,6 +246,17 @@ function deleteFromToday(item,project){
       return todayFolder.list;
       }
       
+  }
+}
+
+function deleteFromWeek(item,project){
+  for (let i = 0; i < weekFolder.list.length; i++){
+    if (`${item}`+ " " + `(${project})` == weekFolder.list[i]){
+      let listItem  = `${item}`+ " " + `(${project})` 
+      let index = todayFolder.list.indexOf(listItem);
+      weekFolder.list.splice(index,1);
+      return weekFolder.list;
+      }
   }
 }
 
@@ -262,8 +277,23 @@ function deleteAllFromToday(e){
     }
   }
 }
-
-
+function deleteAllFromWeek(e){
+  let array = [];
+  let tested;
+  let list = e.target.parentNode.firstChild.textContent;
+  let folderButtons = document.querySelectorAll('.project-button');
+  for (let i = 0; i < folderButtons.length;i++){
+    if (list == folderButtons[i].textContent){
+      for(let i = 0; i < weekFolder.list.length; i++){
+        if (!(weekFolder.list[i].endsWith(`(${list})`))){
+          tested = weekFolder.list[i]; 
+          array.push(tested);
+        }
+      }
+      weekFolder.list = array;
+    }
+  }
+}
 
 //Creates project list to store projects and corresponding lists.   
 class ProjectList{
@@ -289,6 +319,7 @@ export{
   removeHeader,
   deleteAllFromAll,
   deleteAllFromToday,
+  deleteAllFromWeek,
   getAll,
   getList,
   headDiv,
