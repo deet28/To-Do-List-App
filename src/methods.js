@@ -9,7 +9,6 @@ import {
   removeAdd,
   closeItemInput
 } from './inputs.js';
-import{} from './button.js';
 
 //Project Title Div
 const doList = document.getElementsByClassName("to-do-list")[0];
@@ -42,6 +41,12 @@ function changeActive(button){
     }
   }
 };
+
+window.onload = function(){
+  listHeader.textContent = "All Items";
+  headDiv.appendChild(listHeader);
+  removeAdd();
+}
 
 //Appends correct list to page
 function displayList(){
@@ -264,7 +269,7 @@ function deleteFromWeek(item,project){
   for (let i = 0; i < weekFolder.list.length; i++){
     if (`${item}`+ " " + `(${project})` == weekFolder.list[i]){
       let listItem  = `${item}`+ " " + `(${project})` 
-      let index = todayFolder.list.indexOf(listItem);
+      let index = weekFolder.list.indexOf(listItem);
       weekFolder.list.splice(index,1);
       return weekFolder.list;
       }
@@ -322,7 +327,6 @@ class ProjectList{
     return
   }
 }
-
 export{
   stayActive,
   changeActive,

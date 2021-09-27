@@ -7,12 +7,12 @@ import {
 } from './inputs.js'
 
 
-function test (){
+function createPage (){
   buttonListeners();
   inputListeners();
 }
 export { 
-    test,
+    createPage,
 }
 
 

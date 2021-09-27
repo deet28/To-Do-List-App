@@ -1,5 +1,12 @@
-import {projectArray, allFolder} from './inputs.js'
-import {stayActive, displayList,removeHeader, deleteAllFromToday, deleteAllFromWeek, deleteAllFromAll} from './methods.js'
+import {projectArray} from './inputs.js'
+import {
+  stayActive, 
+  displayList,
+  removeHeader, 
+  deleteAllFromToday, 
+  deleteAllFromWeek, 
+  deleteAllFromAll
+} from './methods.js'
 
 //Default Buttons
 const allButton = document.getElementById('all-button');

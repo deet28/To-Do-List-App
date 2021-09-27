@@ -1,6 +1,6 @@
 import './style.css';
-import {test} from'./dom.js';
-test();
+import {createPage} from'./dom.js';
+createPage();
 
 
 
