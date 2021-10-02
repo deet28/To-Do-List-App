@@ -101,6 +101,7 @@ function createProject(){
     newFolder.classList.add('project-button');
     newFolder.classList.add('inactive');
     newFolder.textContent = inputVal.value;
+    newFolder.setAttribute('data-name',inputVal.value);
     let itemList = new ProjectList(newFolder.textContent);
     projectArray.push(itemList);
     console.log(projectArray);
@@ -180,8 +181,6 @@ function todayMaker(){
   let mm = String(today.getMonth() + 1).padStart(2, '0');
   let yyyy = today.getFullYear();
   today =`${yyyy}-${mm}-${dd}`;
-  
-    
     for (let i = 0; i < projectArray.length; i++){
     for (let j = 0; j < projectArray[i].dates.length; j++){
       if (projectArray[i].dates[j]!==today){
@@ -213,7 +212,11 @@ function weekMaker(input){
   let array = [];
   for (let i = 0; i < 7; i++){
   let newDate = today.getDate()+i;
+  if (newDate <= 9){
+    array.push(`0${newDate}`);
+  } else {
     array.push(newDate);
+  }
   }
   for (let i = 0; i < array.length; i++){
     dateToday = `${yyyy}-${mm}-${array[i]}`;

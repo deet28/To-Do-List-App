@@ -17,17 +17,23 @@ let listHeader  = document.createElement('h2');
 
 //Chooses Active Folder
 function stayActive(e){
-  let btnName = e.target.textContent;
-  if (e.target.classList.contains('inactive')){
-    e.target.classList.remove('inactive');
-    e.target.classList.add('active');
-    changeActive(btnName);
-  } else if (e.target.classList.contains('active')){
-    return;
-  } else {
-    e.target.classList.remove('active');
-    e.target.classList.add('inactive');
-  }
+   let btnName = e.target.textContent;
+   if (e.target.classList.contains('inactive')){
+     e.target.classList.remove('inactive');
+     e.target.classList.add('active');
+     changeActive(btnName);
+   } else if (e.target.classList.contains('active')){
+     return;
+   } else {
+     e.target.classList.remove('active');
+     e.target.classList.add('inactive');
+   }
+  document.querySelectorAll('button').forEach(button => {
+    button.classList.remove('active','inactive')
+    if (button == e.target){
+      e.target.classList.add('active');
+    }
+  })
 };
 
 //Removes selected folder when new folder selected
