@@ -7,14 +7,18 @@ import {
   removeToday,
   removeFromWeek,
   removeAdd,
-  closeItemInput
+  closeItemInput,
 } from './inputs.js';
 
+window.onload = function(){
+  listHeader.textContent = "All Items";
+  headDiv.appendChild(listHeader);
+  removeAdd();
+}
 //Project Title Div
 const doList = document.getElementsByClassName("to-do-list")[0];
 const headDiv = document.getElementsByClassName('to-do-head')[0];
 let listHeader  = document.createElement('h2');
-
 //Chooses Active Folder
 function stayActive(e){
    let btnName = e.target.textContent;
@@ -28,14 +32,7 @@ function stayActive(e){
      e.target.classList.remove('active');
      e.target.classList.add('inactive');
    }
-  document.querySelectorAll('button').forEach(button => {
-    button.classList.remove('active','inactive')
-    if (button == e.target){
-      e.target.classList.add('active');
-    }
-  })
 };
-
 //Removes selected folder when new folder selected
 function changeActive(button){
   let folderButtons = document.querySelectorAll('.project-button');
@@ -47,13 +44,6 @@ function changeActive(button){
     }
   }
 };
-
-window.onload = function(){
-  listHeader.textContent = "All Items";
-  headDiv.appendChild(listHeader);
-  removeAdd();
-}
-
 //Appends correct list to page
 function displayList(){
   doList.innerHTML = "";
@@ -66,11 +56,9 @@ function displayList(){
   }
     headDiv.appendChild(listHeader);
     removeAdd();
-    
     return headDiv;
 };
-
-//Gets correct div to append to page. 
+//Gets correct list to append to page. 
 function getList(){ 
   let folderButtons = document.querySelectorAll('.project-button');
   for(let i = 0; i < folderButtons.length; i++){
@@ -95,7 +83,6 @@ function getList(){
         listButton.textContent = projectArray[i].list[j];
         removeItem.addEventListener("click",deleteItem);
         removeItem.addEventListener("click",deleteFromAll);
-          
           //dates for list items
         let dateInputDiv = document.createElement('div');
         let date = document.createElement('input');
@@ -113,7 +100,6 @@ function getList(){
             }else{
             dateDisplay.textContent = ` (${projectArray[i].dates[j]})`;
             }
-        
         listItem.appendChild(removeItem);
         listItem.appendChild(listButton);
         listItem.appendChild(dateDisplay);
@@ -128,9 +114,6 @@ function getList(){
   }
 }
 };
-
-
-//All items list displays items from all project folders
 function getAll(){
   for (let i = 0; i < allFolder.list.length; i++){
     let listItem = document.createElement('div');
@@ -139,7 +122,6 @@ function getAll(){
     listButton.textContent = allFolder.list[i];
     listItem.appendChild(listButton);
     doList.appendChild(listItem);
-    
   }
   return doList;
 }
@@ -151,11 +133,9 @@ function getToday(){
     listButton.textContent = todayFolder.list[i];
     listItem.appendChild(listButton);
     doList.appendChild(listItem);
-    
   }
   return doList;
 }
-
 function getWeek(){
   for (let i = 0; i < weekFolder.list.length; i++){
     let listItem = document.createElement('div');
@@ -190,7 +170,6 @@ function showDate(e){
   }
 };
 
-
 // Removes header and list when project deleted whose header and list is on page.
 function removeHeader(e){
   let folderButtons = document.querySelectorAll('.project-button');
@@ -198,11 +177,12 @@ function removeHeader(e){
     if (folderButtons[i].classList.contains('active')&& folderButtons[i].textContent == e.target.parentNode.firstChild.textContent){
       headDiv.textContent = "";
       doList.textContent = "";
+      removeAdd();
     }
-  }
+  } 
+  
 }
-
-//Deletes a list item from project folder list. 
+//Deletes an indivdual list item from project folder list. 
 function deleteItem(e){
   let folderButtons = document.querySelectorAll('.project-button');
   let itemValue = e.target.nextSibling.textContent; 
@@ -228,7 +208,6 @@ function deleteItem(e){
   }
 }
 }
-
 function deleteFromAll(item, project){
   for (let i = 0; i < allFolder.list.length; i++){
   if (`${item}`+ " " + `(${project})` == allFolder.list[i]){
@@ -237,10 +216,8 @@ function deleteFromAll(item, project){
     allFolder.list.splice(index,1);
     return allFolder.list;
     }
-    
   }
 }
-
 function deleteAllFromAll(e){
   let array = [];
   let tested;
@@ -258,7 +235,6 @@ function deleteAllFromAll(e){
     }
   }
 }
-
 function deleteFromToday(item,project){
   for (let i = 0; i < todayFolder.list.length; i++){
     if (`${item}`+ " " + `(${project})` == todayFolder.list[i]){
@@ -267,10 +243,8 @@ function deleteFromToday(item,project){
       todayFolder.list.splice(index,1);
       return todayFolder.list;
       }
-      
-  }
+    }
 }
-
 function deleteFromWeek(item,project){
   for (let i = 0; i < weekFolder.list.length; i++){
     if (`${item}`+ " " + `(${project})` == weekFolder.list[i]){
@@ -281,7 +255,6 @@ function deleteFromWeek(item,project){
       }
   }
 }
-
 function deleteAllFromToday(e){
   let array = [];
   let tested;
@@ -316,7 +289,6 @@ function deleteAllFromWeek(e){
     }
   }
 }
-
 //Creates project list to store projects and corresponding lists.   
 class ProjectList{
   constructor(name){

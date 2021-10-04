@@ -30,7 +30,6 @@ const addListInput = document.getElementsByClassName('new-item')[0];
 const closeListInput = document.getElementsByClassName('close-item')[0];
 
 //All, Today, This Week, project folders. 
-
 const allFolder = new ProjectList("All Items");
 const todayFolder = new ProjectList("Today");
 const weekFolder = new ProjectList("This week");
@@ -72,8 +71,6 @@ function addItemInput (){
     inputVal.value = "";
   }
 }
-
-
 //Close input to add new list item. (Right Div)
 function closeItemInput(){
   listInput.classList.remove('list-input-after');
@@ -81,7 +78,6 @@ function closeItemInput(){
   listButton.classList.remove('add-after');
   listInputVal.value = "";
 }
-
 //Create new project folder. (Left Div)
 function createProject(){
   for (let i = 0; i < arrayCheck.length; i++){
@@ -126,7 +122,6 @@ function createProject(){
     addButton.classList.remove('add-after');
     }
   }
-
 //Create new list item. 
 function createListItem(){
   let folderButtons = document.querySelectorAll('.project-button');
@@ -155,7 +150,7 @@ function createListItem(){
   }
 }
 }
-
+//Can't have same todo item twice in the same folder. 
 function noDoubles(item){
   let folderButtons = document.querySelectorAll('.project-button');
   for (let i = 0; i < folderButtons.length; i++){
@@ -173,7 +168,6 @@ function noDoubles(item){
     }
   }
 }
-
 //Pushes all list items to today folder. 
 function todayMaker(){
   let today = new Date();
@@ -202,7 +196,7 @@ function todayMaker(){
       }
     }
   }
-
+//Checks list item to see if its date comes within the next 7 days.
 function weekMaker(input){
   let today = new Date();
   let dd = String(today.getDate()).padStart(2, '0');
@@ -225,7 +219,7 @@ function weekMaker(input){
     } 
   }
 }
-//Removes edited date items from today folder. 
+//Removes items from today folder if that item's date is changed from today. 
 function removeToday(){
   let today = new Date();
   let dd = String(today.getDate()).padStart(2, '0');
@@ -233,7 +227,6 @@ function removeToday(){
   let yyyy = today.getFullYear();
       
   today =`${yyyy}-${mm}-${dd}`;
-    
     for (let i = 0; i < projectArray.length; i++){
       for (let j = 0; j < projectArray[i].list.length; j++){
         if (!(projectArray[i].dates[j] == today)){
@@ -248,7 +241,7 @@ function removeToday(){
       }
     }
   }
-
+//Removes items from week folder if date is changed from a date of this week. 
 function removeFromWeek(){
   for (let i = 0; i < projectArray.length; i++){
     for (let j = 0; j < projectArray[i].list.length; j++){
@@ -264,11 +257,10 @@ function removeFromWeek(){
     }
   }
 }
-
-
-//Does not allow to add item to general items folder. 
+//Does not allow to add items directly to All Items, Today, or This Week Folder. 
 function removeAdd(){
-  if (headDiv.textContent === "All Items"||headDiv.textContent === "Today"||headDiv.textContent === "This week"){
+  if (headDiv.textContent === "All Items"||headDiv.textContent === "Today"||
+      headDiv.textContent === "This week"||headDiv.textContent === ""){
     listButton.classList.add('add-after')
     }else{
     listButton.classList.remove('add-after');
@@ -279,7 +271,6 @@ function inputListeners(){
   addButton.addEventListener("click",addProjectInput);
   closeProject.addEventListener("click", closeProjectInput);
   newProject.addEventListener("click",createProject);
-
   listButton.addEventListener("click",addItemInput);
   closeListInput.addEventListener("click",closeItemInput);
   addListInput.addEventListener("click",createListItem);

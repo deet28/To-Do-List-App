@@ -5,7 +5,7 @@ import {
   removeHeader, 
   deleteAllFromToday, 
   deleteAllFromWeek, 
-  deleteAllFromAll
+  deleteAllFromAll,
 } from './methods.js'
 
 //Default Buttons
@@ -32,11 +32,7 @@ function projFolder(project){
   projects[project.childNodes[0].firstChild.textContent] = project.childNodes[0].firstChild.textContent;
   return projects;
 }
-
 //Removes a project folder from project folder list.
-//Removes array item associated with that project folder (arrayCheck) 
-//Now also removes item associated with object folder (projects)
-
 function removeProject(e){
   for (const key in projects){
   if (e.target.parentNode.firstChild.textContent == projects[key]){
@@ -55,19 +51,17 @@ function removeProject(e){
     }
   }
 }
-
 //Removes full project list if project is open and it is deleted. 
 function removeFullProject(e){
-  let removedProject = e.target.parentNode.firstChild.textContent
+  let removedProject = e.target.parentNode.firstChild.textContent;
   for (let i = 0; i < projectArray.length; i++){
   if (removedProject == projectArray[i].name){
     let index = projectArray.indexOf(projectArray[i]);
     projectArray.splice(index,1);
-  }
+    }
     deleteFromList();
   }
 }
-
 function deleteFromList(){
   if (allButton.classList.contains('active')){
     displayList();
@@ -77,8 +71,6 @@ function deleteFromList(){
     displayList();
   }
 }
-
-
 function buttonListeners(){
   allButton.addEventListener("click",stayActive);
   allButton.addEventListener("click",displayList);
