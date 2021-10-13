@@ -87,6 +87,7 @@ function getList(){
         let dateInputDiv = document.createElement('div');
         let date = document.createElement('input');
         date.setAttribute('type','date');
+        dateInputDiv.classList.add('date-div');
         date.addEventListener("input",showDate);
         date.addEventListener("input",removeToday);
         date.addEventListener("input",removeFromWeek);
@@ -98,7 +99,7 @@ function getList(){
            if(thisDate == undefined){
             dateDisplay.textContent = `(No Date)`;
             }else{
-            dateDisplay.textContent = ` (${projectArray[i].dates[j]})`;
+            dateDisplay.textContent = dateFormat(` (${projectArray[i].dates[j]})`)
             }
         listItem.appendChild(removeItem);
         listItem.appendChild(listButton);
@@ -119,6 +120,7 @@ function getAll(){
     let listItem = document.createElement('div');
     listItem.classList.add('list-item-div');
     let listButton = document.createElement('div');
+    listButton.classList.add('list-button');
     listButton.textContent = allFolder.list[i];
     listItem.appendChild(listButton);
     doList.appendChild(listItem);
@@ -130,6 +132,7 @@ function getToday(){
     let listItem = document.createElement('div');
     listItem.classList.add('list-item-div');
     let listButton = document.createElement('div');
+    listButton.classList.add('list-button');
     listButton.textContent = todayFolder.list[i];
     listItem.appendChild(listButton);
     doList.appendChild(listItem);
@@ -141,6 +144,7 @@ function getWeek(){
     let listItem = document.createElement('div');
     listItem.classList.add('list-item-div');
     let listButton = document.createElement('div');
+    listButton.classList.add('list-button');
     listButton.textContent = weekFolder.list[i];
     listItem.appendChild(listButton);
     doList.appendChild(listItem);
@@ -169,7 +173,14 @@ function showDate(e){
     }
   }
 };
-
+function dateFormat(input){
+  let newDate = Array.from(input);
+  let month = (`${newDate[7]}${newDate[8]}/`);
+  let day = (`${newDate[10]}${newDate[11]}/`);
+  let year = (`${newDate[4]}${newDate[5]}`)
+  let dateStyle = month+day+year;
+  return (dateStyle);
+}
 // Removes header and list when project deleted whose header and list is on page.
 function removeHeader(e){
   let folderButtons = document.querySelectorAll('.project-button');

@@ -126,6 +126,7 @@ function createProject(){
 function createListItem(){
   let folderButtons = document.querySelectorAll('.project-button');
   if (listInputVal.value === ""){
+    closeItemInput();
     alert("enter thing to do!");
   } else if (noDoubles(listInputVal.value)){
     closeItemInput();

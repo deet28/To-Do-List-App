@@ -23,7 +23,7 @@ module.exports = {
       patterns: [
         {
           from: 'src/index.html',
-          to: '' // copies all files to dist/assets
+          to: '' 
         },
       ]
     })

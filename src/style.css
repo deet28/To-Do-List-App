@@ -123,7 +123,6 @@ h2{
   flex-wrap:nowrap;
   margin:0;
   padding:0;
-
 }
 .proj-elem{
   min-height:2.0rem;
@@ -178,9 +177,9 @@ h2{
   display:flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
+  text-align: justify;
   word-break:break-word;
-  
+  text-align-last:left;
 }
 .to-do-head{
   text-align: left;
@@ -192,12 +191,13 @@ h2{
   max-width:60%;
   min-width: 60%;
   font-size: 1.2rem;
-  margin-left:0;
+  
 }
 
 .to-do-list{
-  text-align: center;
+  text-align: left;
   min-width:100%;
+  max-width: 100%;
   border:1px solid black;
   display:flex;
   flex-direction: column;
@@ -216,11 +216,18 @@ h2{
   min-height:2rem;
   margin-bottom:10px;
   padding:0;
+  margin-top: 1rem;
+}
+.list-item-div > div:nth-child(3){
+  margin-left:auto;
 }
 
 .date-display{
   font-size:12px;
-  min-width: 3rem;
+  min-width: 4rem;
+}
+.date-div{
+  align-self:center !important;
 }
 
 /*Section for the form - buttons and inputs that create new list items (Right-Div)*/
@@ -246,7 +253,6 @@ h2{
 .list-button{
   margin-left:1rem;
   margin-right:2rem;
-  background-color: white;
 }
 
 .remove-item{
@@ -257,8 +263,7 @@ h2{
   line-height: 7px;
   margin-left:0;
   max-height: 1.5rem;
-  box-shadow:
-}
+};
 
 .remove-item:hover{
   cursor: pointer;
@@ -288,13 +293,12 @@ h2{
 }
 .list-input-value{
   height:2rem;
-  min-width:500px;
+  width:20rem;
   font-size: 1rem;
   text-align: center;
   font-size: 1rem;
   font-style: inherit;
 }
-
 /* Toggle Active and Inactive buttons */ 
 .active{
   background-color: darkgray;
