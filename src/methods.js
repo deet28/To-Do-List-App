@@ -181,7 +181,6 @@ function dateFormat(input){
   let dateStyle = month+day+year;
   return (dateStyle);
 }
-// Removes header and list when project deleted whose header and list is on page.
 function removeHeader(e){
   let folderButtons = document.querySelectorAll('.project-button');
   for(let i = 0; i < folderButtons.length;i++){
