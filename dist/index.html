@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<head>
+  <title>todolist</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <script src = "main.js" defer></script>
+  <script src="https://use.fontawesome.com/0a3119697c.js"></script>
+</head>
+<body>
+  <header class="header">
+    <h1 class = "header">ToDo's</h1>
+  </header>
+  <main class = "main-body">
+    <nav class = "nav-div">
+      <div class = "left-div">
+        <button class = "button-elem" id = "all-button">
+          <i class="fa fa-envelope-open-o">
+          </i>
+        </button>
+        <button class = "button-elem" id = "today-button">
+          <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+        </button>
+        <button class = "button-elem" id = "week-button">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+          </button>
+        <h2>Project Folders</h2>
+        <ul class = "project-list"></ul>
+        <button class = "button-elem" id = "add-button">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+          Add New
+        </button>
+        <div class = "input-box">
+            <input type = "text" class = "input-value inputs" placeholder = "New project" required>
+            <div class = "input-buttons">
+              <button class = "proj-button new-project"> 
+                <i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
+              </button>
+              <button class = "proj-button close-project">
+                <i class="fa fa-times-circle fa-2x" aria-hidden="true"></i>
+              </button>
+            </div>
+        </div>
+      </div>
+    </nav>
+    
+    <div class = "right-div" id = "view-section">
+      <div class = "to-do-head"></div>
+      <div class = "list-div">
+      <ul class = "to-do-list" id = "todos"></ul>
+      </div>
+      <button class ="button-add-item" id = "list-button">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        Add New
+      </button>
+      <div class = "list-input-box">
+            <input type = "text" class = "list-input-value inputs"required>
+            <div class = "input-buttons">
+              <button class = "proj-button new-item"> 
+                <i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
+              </button>
+              <button class = "proj-button close-item">
+                <i class="fa fa-times-circle fa-2x" aria-hidden="true"></i>
+              </button>
+            </div>
+        </div>
+    </div>
+  </main>
+</body>
+
+</html>
+
+

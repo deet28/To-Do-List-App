@@ -8,7 +8,6 @@
     "build": "npx webpack",
     "serve": "live-server --open=dist",
     "build:serve": "npx webpack serve"
-
   },
   "keywords": [],
   "author": "",
